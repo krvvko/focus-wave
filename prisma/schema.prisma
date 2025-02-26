@@ -1,0 +1,126 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum AvailableField {
+  SLEEP
+  SOCIAL_NETWORKS
+  WORK
+  STUDY
+  EXERCISE
+  OTHER
+  ENTERTAINMENT
+  MEAL
+  RELAXATION
+  HOBBIES
+  FAMILY_TIME
+  TRAVEL
+  SHOPPING
+  MEDITATION
+  GAMING
+  CHORES
+  HEALTHCARE
+  READING
+  PLANNING
+  COMMUNITY_SERVICE
+  OUTDOOR_ACTIVITY
+}
+
+enum Operator {
+  LESS_THAN    @map("<")
+  GREATER_THAN @map(">")
+  EQUALS       @map("=")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  goal          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  focus_on      Focus[]
+  days_logs     Day[]
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Day {
+  id                String   @id @default(cuid())
+  userId            String
+  day               DateTime
+  sleep             Int?
+  social_networks   Int?
+  work              Int?
+  study             Int?
+  exercise          Int?
+  other             Int?
+  entertainment     Int?
+  meal              Int?
+  relaxation        Int?
+  hobbies           Int?
+  family_time       Int?
+  travel            Int?
+  shopping          Int?
+  meditation        Int?
+  gaming            Int?
+  chores            Int?
+  healthcare        Int?
+  reading           Int?
+  planning          Int?
+  community_service Int?
+  outdoor_activity  Int?
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, day])
+}
+
+model Focus {
+  id       String         @id @default(cuid())
+  userId   String
+  field    AvailableField
+  operator Operator
+  time     Int
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@id([identifier, token])
+}
