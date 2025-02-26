@@ -29,6 +29,8 @@ enum AvailableField {
   PLANNING
   COMMUNITY_SERVICE
   OUTDOOR_ACTIVITY
+  PROGRAMMING
+  SELF_EDUCATION
 }
 
 enum Operator {
@@ -78,6 +80,8 @@ model Day {
   planning          Int?
   community_service Int?
   outdoor_activity  Int?
+  programming       Int?
+  self_education    Int?
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, day])
