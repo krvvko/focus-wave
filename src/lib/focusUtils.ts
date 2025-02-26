@@ -20,6 +20,8 @@ export const AllowedFields = [
     "PLANNING",
     "COMMUNITY_SERVICE",
     "OUTDOOR_ACTIVITY",
+    "PROGRAMMING",
+    "SELF_EDUCATION"
 ] as const;
 
 export type FocusField = typeof AllowedFields[number];
@@ -38,3 +40,29 @@ export interface DayLog {
 }
 
 export const mapFieldToKey = (field: FocusField): string => field.toLowerCase();
+
+export const fieldMap = {
+    "SLEEP": 'sleep',
+    "SOCIAL_NETWORKS": 'social networks',
+    "WORK": 'work',
+    "STUDY": 'study',
+    "EXERCISE": 'exercise',
+    "OTHER": 'other',
+    "ENTERTAINMENT": 'entertainment',
+    "MEAL": 'meal',
+    "RELAXATION": 'relaxation',
+    "HOBBIES": 'hobbies',
+    "FAMILY_TIME": 'family time',
+    "TRAVEL": 'travel',
+    "SHOPPING": 'shopping',
+    "MEDITATION": 'meditation',
+    "GAMING": 'gaming',
+    "CHORES": 'chores',
+    "HEALTHCARE": 'healthcare',
+    "READING": 'reading',
+    "PLANNING": 'planning',
+    "COMMUNITY_SERVICE": 'community service',
+    "OUTDOOR_ACTIVITY": 'outdoor activity',
+    "PROGRAMMING": 'programming',
+    "SELF_EDUCATION": 'self eduction',
+};

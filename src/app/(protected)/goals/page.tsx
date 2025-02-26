@@ -23,8 +23,6 @@ export default async function GoalsPage() {
     });
 
     return (
-        <div>
-            <GoalsForm initialGoals={userData?.focus_on || []} />
-        </div>
+        <GoalsForm initialGoals={userData?.focus_on || []} />
     );
 }

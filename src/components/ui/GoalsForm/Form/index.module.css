@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+}
+.content {
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+}
+.buttons {
+    display: flex;
+    gap: 1em;
+}
+.input {
+    font-size: 0.9rem;
+    font-weight: 600;
+    height: 30px;
+    padding: 4px;
+    outline: none;
+    border: 1px solid var(--block-2);
+    border-radius: var(--border-radius-1);
+    background: var(--block-2);
+    color: var(--color-2);
+    transition-duration: 0.2s;
+}
+.input:focus {
+    border: 1px solid var(--border-color-3);
+}
+.inOp {
+    width: 75px;
+}
+.inN {
+    text-align: center;
+    width: 40px;
+}
+.add {
+    border: 1px solid var(--color-1)
+}
+.add:hover {
+    color: var(--bg);
+    background: var(--color-1);
+}
+.cancel:hover {
+    background: var(--red);
+}
