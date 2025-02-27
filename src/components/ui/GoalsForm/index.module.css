@@ -1,7 +1,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    flex: 1;
     align-self: stretch;
     border: 1px solid var(--border-color-3);
     border-radius: var(--border-radius-3);
@@ -23,4 +22,9 @@
 }
 .add:not(:disabled):hover {
     background: var(--color-2);
+}
+.save {
+    align-self: flex-end;
+    background: var(--color-1);
+    color: var(--bg);
 }

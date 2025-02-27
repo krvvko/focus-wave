@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border-color-2);
+    border-radius: var(--border-radius-3);
+    padding: 1.5em;
+    gap: 1em;
+}
+.message {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.button {
+    all: unset;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition-duration: 0.2s;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-1);
+    border: 1px solid transparent;
+    background: var(--color-1);
+    color: var(--bg);
+}
+.button:hover {
+    background: var(--color-3);
+}

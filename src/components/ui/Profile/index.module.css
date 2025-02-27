@@ -1,3 +1,31 @@
 .container {
     display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color-2);
+    border-radius: var(--border-radius-3);
+    padding: 1.5em;
+    gap: 1em;
+    flex: 1;
+}
+.info {
+    display: flex;
+    gap: 0.5em;
+}
+.infoText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    justify-content: center;
+}
+.infoText > span:nth-child(1) {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.infoText > span:nth-child(2) {
+    color: var(--color-5);
+    font-style: italic;
+}
+.stats {
+    display: flex;
+    gap: 0.5em;
 }

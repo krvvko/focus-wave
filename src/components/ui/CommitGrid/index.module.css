@@ -1,3 +1,106 @@
+.wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em;
+    border: 1px solid var(--border-color-2);
+    border-radius: var(--border-radius-3);
+    gap: 1em;
+}
+
 .container {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.monthLabelsWrapperStyle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.monthLabelsStyle {
+    margin-left: 40px;
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+.monthLabelCellStyle {
+    width: 12px;
+    text-align: center;
+    font-size: 10px;
+}
+.gridWrapperStyle {
+    display: flex;
+    flex-direction: row;
+}
+.weekLabelsStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 40px;
+}
+.weekLabelCellStyle {
+    height: 16px;
+    font-size: 10px;
+    margin-right: 4px;
+}
+
+.commitGridStyle {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.weekColumnStyle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tooltip {
+    position: absolute;
+    top: -24px;
+    white-space: nowrap;
+    z-index: 2;
+    background: var(--block-2);
+    padding: 4px 12px;
+    border-radius: var(--border-radius-1);
+    pointer-events: none;
+    font-size: 12px;
+}
+.headline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    align-self: flex-start;
+}
+.bottom {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+}
+.description {
+    display: flex;
+    gap: 0.5em;
+    font-size: 0.9rem;
+    color: var(--color-5);
+    font-style: italic;
+    justify-content: center;
+    align-items: center;
+}
+.descriptionInner {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
 }

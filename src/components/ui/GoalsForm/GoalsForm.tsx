@@ -4,11 +4,11 @@ import { redirect } from "next/navigation";
 import styles from "./index.module.css";
 import {
     FocusGoal,
-    FocusField,
     AllowedFields,
 } from "@/lib/focusUtils";
 import Form from "./Form/Form";
 import List from "./List/List";
+import { v4 as uuidv4 } from 'uuid';
 
 type GoalsFormProps = {
     initialGoals: FocusGoal[];
@@ -18,14 +18,13 @@ const GoalsForm = ({ initialGoals }: GoalsFormProps) => {
     const [goals, setGoals] = useState<FocusGoal[]>(initialGoals);
     const [showForm, setShowForm] = useState(false);
 
-    // Calculate remaining options for the goal fields
     const remainingOptions = AllowedFields.filter(
         (opt) => !goals.some((goal) => goal.field === opt)
     );
 
     const addGoal = (newGoal: Omit<FocusGoal, "id">) => {
         const goalWithId: FocusGoal = {
-            id: crypto.randomUUID(),
+            id: uuidv4(),
             ...newGoal,
         };
         setGoals((prev) => [...prev, goalWithId]);
@@ -71,14 +70,11 @@ const GoalsForm = ({ initialGoals }: GoalsFormProps) => {
                     onCancel={() => setShowForm(false)}
                 />
             )}
-
-            <div className={styles.goalsList}>
-                <List goals={goals} onDelete={deleteGoal} />
-            </div>
+            <List goals={goals} onDelete={deleteGoal} />
 
             {goals.length > 0 && (
-                <button onClick={handleNext}>
-                    Next
+                <button className={styles.save} onClick={handleNext}>
+                    Save Goals
                 </button>
             )}
         </div>

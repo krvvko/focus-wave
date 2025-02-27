@@ -1,28 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FocusField, mapFieldToKey } from "@/lib/focusUtils";
-
-type FocusItem = {
-    id: string;
-    field: FocusField;
-};
-
-type LogResponse = {
-    field: FocusField;
-    time: number;
-};
-
-type DayLog = {
-    [key: string]: any;
-};
+import { useRouter } from "next/navigation";
+import { mapFieldToKey } from "@/lib/focusUtils";
+import {Focus} from "@prisma/client"; // ensure this export exists
 
 export default function DayLogFiller() {
-    const [dayLog, setDayLog] = useState<DayLog | null>(null);
-    const [focusItems, setFocusItems] = useState<FocusItem[]>([]);
-    const [missingFields, setMissingFields] = useState<FocusItem[]>([]);
+    const [dayLog, setDayLog] = useState(null);
+    const [focusItems, setFocusItems] = useState([]);
+    const [missingFields, setMissingFields] = useState<Focus[]>([]);
     const [inputValue, setInputValue] = useState("");
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     useEffect(() => {
         async function fetchData() {
@@ -46,10 +35,9 @@ export default function DayLogFiller() {
 
     useEffect(() => {
         if (!loading) {
-            const missing = focusItems.filter((item) => {
-                if (!dayLog) return true;
+            const missing = focusItems.filter((item: Focus) => {
                 const key = mapFieldToKey(item.field);
-                return dayLog[key] === null || dayLog[key] === undefined;
+                return !dayLog || dayLog[key] === null || dayLog[key] === undefined;
             });
             setMissingFields(missing);
         }
@@ -58,8 +46,8 @@ export default function DayLogFiller() {
     const handleNextPrompt = async () => {
         if (!inputValue) return alert("Please enter a value");
 
-        const currentFocus = missingFields[0];
-        const logUpdate: LogResponse = {
+        const currentFocus: Focus = missingFields[0];
+        const logUpdate = {
             field: currentFocus.field,
             time: parseFloat(inputValue),
         };
@@ -85,22 +73,26 @@ export default function DayLogFiller() {
 
     if (loading) return <p>Loading...</p>;
 
+    if (missingFields.length === 0) {
+        // Everything is filled – offer a button to go back to the app.
+        return (
+            <div>
+                <p>All filled.</p>
+                <button onClick={() => router.push("/app")}>Back to App</button>
+            </div>
+        );
+    }
+
     return (
         <div>
-            {missingFields.length > 0 ? (
-                <div>
-                    <p>Please complete the missing field: {missingFields[0].field}</p>
-                    <input
-                        type="number"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        required
-                    />
-                    <button onClick={handleNextPrompt}>Next</button>
-                </div>
-            ) : (
-                <p>All goals filled.</p>
-            )}
+            <p>Please complete the missing field: {missingFields[0].field}</p>
+            <input
+                type="number"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                required
+            />
+            <button onClick={handleNextPrompt}>Next</button>
         </div>
     );
 }

@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: var(--border-radius-2);
+    background: var(--border-color-1);
+}
+.delete {
+    color: var(--color-4);
+}
+.delete:hover {
+    border: 1px solid var(--red);
+    color: var(--color-1);
+}
+.text {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    color: var(--color-3);
+}
+.mark {
+    font-style: italic;
+    color: var(--color-1);
+    padding: 2px 8px;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-1);
+    background: var(--block-2);
+}

@@ -1,5 +1,4 @@
 import {redirect} from "next/navigation";
-import DayLogFiller from "@/components/ui/DayLogFiller/DayLogFiller";
 import {prisma} from "@/lib/prisma";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
@@ -7,6 +6,8 @@ import GridDisplay from "@/components/logic/GridDisplay/GridDisplay";
 import TodaysGoals from "@/components/ui/TodayFocus/TodayFocus";
 import styles from './index.module.css';
 import Profile from "@/components/ui/Profile/Profile";
+import DayLogStatus from "@/components/ui/DayLogStatus/DayLogStatus";
+import React from "react";
 
 export default async function AppPage() {
     const session = await getServerSession(authOptions);
@@ -21,11 +22,17 @@ export default async function AppPage() {
     }
 
     return (
-        <div className={styles.main}>
-            <Profile initialUser={userData!} />
-            <DayLogFiller />
+        <div className={styles.container}>
+            <div className={styles.wrapper}>
+                <div className={styles.left}>
+                    <Profile initialUser={userData!} />
+                </div>
+                <div className={styles.right}>
+                    <DayLogStatus focus_on={userData!.focus_on!} days_logs={userData!.days_logs!} />
+                    <TodaysGoals focus_on={userData!.focus_on!} days_logs={userData!.days_logs!} />
+                </div>
+            </div>
             <GridDisplay />
-            <TodaysGoals />
         </div>
     );
 }

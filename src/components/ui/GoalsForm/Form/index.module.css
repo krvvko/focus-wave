@@ -41,6 +41,10 @@
     color: var(--bg);
     background: var(--color-1);
 }
+.cancel {
+    color: var(--color-4);
+}
 .cancel:hover {
-    background: var(--red);
+    border: 1px solid var(--red);
+    color: var(--color-1);
 }

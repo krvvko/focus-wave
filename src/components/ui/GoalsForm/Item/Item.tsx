@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FocusGoal, fieldMap } from "@/lib/focusUtils";
+import {FocusGoal, fieldMap} from "@/lib/focusUtils";
 import styles from './index.module.css';
 
 type ItemProps = {
@@ -8,24 +8,30 @@ type ItemProps = {
     onDelete: (goalId: string) => void;
 };
 
-const Item = ({ goal, onDelete }: ItemProps) => {
+const Item = ({goal, onDelete}: ItemProps) => {
+    const { id, time, operator, field } = goal;
+
+    const operatorText = {
+        LESS_THAN: "less",
+        GREATER_THAN: "more",
+        EQUALS: "=",
+    }[operator];
+
     return (
-        <div
-            style={{
-                display: "flex",
-                alignItems: "center",
-            }}
-        >
-      <span>
-        I want to spend {goal.time} hours{" "}
-          {goal.operator === "LESS_THAN"
-              ? "less"
-              : goal.operator === "GREATER_THAN"
-                  ? "more"
-                  : "="}{" "}
-          doing {fieldMap[goal.field]}
-      </span>
-            <button onClick={() => onDelete(goal.id)}>
+        <div className={styles.container}>
+            <span className={styles.text}>
+                I want to spend
+                <span className={styles.mark}>{time}</span>
+                hours
+                <span className={styles.mark}>{operatorText} </span>
+                doing
+                <span className={styles.mark}>{fieldMap[field]}</span>
+            </span>
+            <button
+                className={styles.delete}
+                onClick={() => onDelete(id)}
+                aria-label="Delete goal"
+            >
                 Delete Goal
             </button>
         </div>

@@ -1,3 +1,38 @@
 .container {
     display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.5em;
+    border: 1px solid var(--border-color-2);
+    border-radius: var(--border-radius-3);
+    flex: 1;
+}
+.headline {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.item {
+    display: flex;
+    gap: 0.25em;
+    background: var(--border-color-1);
+    padding: 1em;
+    border-radius: var(--border-radius-2);
+    align-items: center;
+}
+.field {
+    color: var(--color-2);
+    text-transform: capitalize;
+}
+.status {
+    font-style: italic;
+}
+.stats {
+    color: var(--color-4);
+    font-style: italic;
+    font-size: 0.9rem;
 }

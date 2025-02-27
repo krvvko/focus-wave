@@ -14,8 +14,7 @@ const List = ({ goals, onDelete }: GoalsListProps) => {
         return <div>No goals yet</div>;
     }
     return (
-        <div>
-            <h3>Your Goals:</h3>
+        <div className={styles.container}>
             {goals.map((goal) => (
                 <Item key={goal.id} goal={goal} onDelete={onDelete} />
             ))}
